@@ -40,6 +40,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
+      "@adam-rocska/plist": [ "plist/src/index.ts" ],
       "@adam-rocska/old-style-plist": [ "old-style-plist/src/index.ts" ]
     }
   },

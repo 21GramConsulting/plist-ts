@@ -1,2 +1,3 @@
 packages:
-  - "old-style-plist"
+  - "plist"
+  - "old-style"

@@ -1,3 +1,3 @@
 export default {
-  builds: true
+	builds: true
 };

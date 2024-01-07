@@ -1,4 +1,6 @@
-# Old-Style PLIST parser for TypeScript
+# Plist parsers for TypeScript
+
+## Old-Style
 
 This library provides a parser with which you may parse
 **old-style** PLIST files to JavaScript objects.

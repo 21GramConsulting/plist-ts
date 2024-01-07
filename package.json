@@ -1,22 +1,35 @@
 {
-  "name": "@adam-rocska/old-style-plist",
+  "name": "@adam-rocska/plist",
   "version": "1.0.0",
-  "description": "This library provides a parser with which you may parse old-style PLIST files to JavaScript objects.",
-  "main": "./old-style-plist/dist/index.js",
-  "module": "./old-style-plist/dist/index.esm.js",
-  "types": "./old-style-plist/dist/index.d.ts",
-  "typesVersions": { "*": { } },
+  "description": "This library provides a parser with which you may parse PLIST files to JavaScript objects.",
+  "main": "./plist/dist/index.js",
+  "module": "./plist/dist/index.esm.js",
+  "types": "./plist/dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "old-style": [
+        "./old-style/dist/index.d.ts"
+      ]
+    }
+  },
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./old-style-plist/dist/index.mjs",
-      "module": "./old-style-plist/dist/index.esm.js",
-      "require": "./old-style-plist/dist/index.js"
+      "import": "./plist/dist/index.mjs",
+      "module": "./plist/dist/index.esm.js",
+      "require": "./plist/dist/index.js"
+    },
+    "./old-style": {
+      "import": "./old-style/dist/index.mjs",
+      "module": "./old-style/dist/index.esm.js",
+      "require": "./old-style/dist/index.js"
     }
   },
   "files": [
-    "old-style-plist/dist/**/*.{js,d.ts,mjs,d.mts}",
-    "old-style-plist/package.json"
+    "plist/dist/**/*.{js,d.ts,mjs,d.mts}",
+    "old-style/dist/**/*.{js,d.ts,mjs,d.mts}",
+    "plist/package.json",
+    "old-style/package.json"
   ],
   "engines": {
     "node": ">=18.0.0",
@@ -32,23 +45,23 @@
     "lint": "eslint .",
     "prepublishOnly": "set -e && pnpm types:check && pnpm lint && pnpm attw"
   },
-  "homepage": "https://adam-rocska.github.io/old-style-plist-ts/",
+  "homepage": "https://adam-rocska.github.io/plist-ts/",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adam-rocska/old-style-plist-ts.git"
+    "url": "https://github.com/adam-rocska/plist-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/adam-rocska/old-style-plist-ts/issues"
+    "url": "https://github.com/adam-rocska/plist-ts/issues"
   },
   "keywords": [
     "plist",
     "old-style",
-    "old-style-plist",
-    "old-style-plist-ts"
+    "plist",
+    "plist-ts"
   ],
   "author": {
     "name": "Adam Laszlo Rocska",
