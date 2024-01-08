@@ -1,5 +1,5 @@
 import {Parsable} from "./Parsable";
-import {ExpressionFilterFactory} from "./ExpressionFilterFactory";
+import {ExpressionFilter} from "./ExpressionFilter";
 import {error} from "console";
 import {StringFactory} from "./Expressions/StringFactors";
 import {CommentFactory} from "./Expressions/CommentFactory";
@@ -14,15 +14,13 @@ export function parse(input: any, intent: ParseIntent): any {
     ? input
     : new Parsable(input);
 
-  const factory = new ExpressionFilterFactory([
+  const filter = new ExpressionFilter(parsable, [
     new StringFactory(),
     new CommentFactory(),
     new ArrayFactory(),
     new DictionaryFactory(),
     new BinaryFactory()
   ]);
-
-  const filter = factory.create(parsable);
 
   while (filter.undecided) {
     parsable.updatePresent();

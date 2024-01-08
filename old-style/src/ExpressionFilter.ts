@@ -7,8 +7,8 @@ export class ExpressionFilter {
   private expressions: ExpressionFactory<any>[];
 
   constructor(
-    expressions: ExpressionFactory<any>[],
-    parsable: Parsable
+    parsable: Parsable,
+    expressions: ExpressionFactory<any>[]
   ) {
     this.expressions = expressions;
     this.parsable = parsable;
