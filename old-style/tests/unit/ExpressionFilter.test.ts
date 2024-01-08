@@ -39,7 +39,7 @@ describe(`ExpressionFilter`, () => {
     });
     it(`returns the expression when there is one expression factory`, () => {
       const expression = {} as Expression<any>;
-      const expressionFactory = {create: (i) => expression} as ExpressionFactory<any>;
+      const expressionFactory = {create: (_i) => expression} as ExpressionFactory<any>;
       const spy = jest.spyOn(expressionFactory, `create`);
       const filter = new ExpressionFilter(stubParsable, [expressionFactory]);
       expect(filter.expression).toBe(expression);
