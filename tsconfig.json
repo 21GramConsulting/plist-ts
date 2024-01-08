@@ -40,8 +40,8 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@adam-rocska/plist": [ "plist/src/index.ts" ],
-      "@adam-rocska/old-style-plist": [ "old-style-plist/src/index.ts" ]
+      "@21gram-consulting/plist": [ "plist/src/index.ts" ],
+      "@21gram-consulting/old-style-plist": [ "old-style-plist/src/index.ts" ]
     }
   },
   "exclude": [

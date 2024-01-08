@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "@adam-rocska/plist": "*"
+    "@21gram-consulting/plist": "*"
   },
   "devDependencies": {
     "type-fest": "4.9.0"

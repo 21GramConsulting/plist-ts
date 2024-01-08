@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@adam-rocska/plist": [ "plist/src/index.ts" ],
-      "@adam-rocska/plist/old-style": [ "old-style/src/index.ts" ],
+      "@21gram-consulting/plist": [ "plist/src/index.ts" ],
+      "@21gram-consulting/plist/old-style": [ "old-style/src/index.ts" ],
       "#plist/*": [ "plist/src/*" ],
       "#old-style/*": [ "old-style/src/*" ]
     }
