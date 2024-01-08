@@ -2,7 +2,7 @@ import {Array} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 import {parse} from "../parse";
 
-export class ArrayExpression extends Expression<Array[]> {
+export class ArrayExpression extends Expression<Array> {
   protected resolve(): Array | void {
     const result: Array = [];
     this.context.commitPresent();
