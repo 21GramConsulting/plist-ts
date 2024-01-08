@@ -1,4 +1,4 @@
-import {Node, isNode} from ".";
+import {Node, isNode} from "./Node";
 
 export type String = string;
 export type StringNode = Node<`STRING`, String>;

@@ -1,4 +1,5 @@
-import {CommentNode, Node, isCommentNode, isNode} from ".";
+import {CommentNode, isCommentNode} from "./Comment";
+import {Node, isNode} from "./Node";
 
 export type Binary = Uint8Array;
 export type BinaryNode = Node<

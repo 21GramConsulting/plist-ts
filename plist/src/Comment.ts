@@ -1,4 +1,4 @@
-import {Node, isNode} from ".";
+import {Node, isNode} from "./Node";
 
 export type Comment = string;
 export type CommentNode = Node<`COMMENT`, Comment>;

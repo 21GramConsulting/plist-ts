@@ -1,4 +1,4 @@
-import {Node, isNode} from ".";
+import {Node, isNode} from "./Node";
 
 export type Dictionary = Record<string, any>;
 export type DictionaryNode = Node<`DICTIONARY`, Dictionary, Node>;

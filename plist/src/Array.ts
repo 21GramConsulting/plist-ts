@@ -1,4 +1,4 @@
-import {Node, isNode} from ".";
+import {Node, isNode} from "./Node";
 
 export type Array = any[];
 export type ArrayNode = Node<`ARRAY`, Array, Node>;

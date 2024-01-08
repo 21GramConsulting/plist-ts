@@ -3,9 +3,9 @@ import {ExpressionFilter} from "./ExpressionFilter";
 import {Parsable} from "./Parsable";
 
 export class ExpressionFilterFactory {
-  private expressionFactories: ExpressionFactory[];
+  private expressionFactories: ExpressionFactory<any>[];
 
-  constructor(expressions: ExpressionFactory[]) {
+  constructor(expressions: ExpressionFactory<any>[]) {
     this.expressionFactories = expressions;
   }
 
