@@ -48,7 +48,9 @@ describe(`Expression`, () => {
 
   describe(`#error`, () => {
     it(`calls console.error`, () => {
-      const spy = jest.spyOn(expression, `error`);
+      const spy = jest
+        .spyOn(expression, `error`)
+        .mockImplementation(() => {});
       expression.error(`foo`);
       expect(spy).toHaveBeenCalledWith(`foo`);
     });
