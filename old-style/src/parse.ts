@@ -5,10 +5,11 @@ import {CommentFactory} from "./Expressions/CommentFactory";
 import {ArrayFactory} from "./Expressions/ArrayFactory";
 import {BinaryFactory} from "./Expressions/BinaryFactory";
 import {DictionaryFactory} from "./Expressions/DictionaryFactory";
+import {Expression} from "./Expression";
 
-export function parse(input: Context): any;
-export function parse(input: string): any;
-export function parse(input: any): any {
+export function parse(input: Context): Expression<any> | void;
+export function parse(input: string): Expression<any> | void;
+export function parse(input: any): Expression<any> | void {
   const context = input instanceof Context
     ? input
     : new Context(input);

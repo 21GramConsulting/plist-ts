@@ -1,10 +1,11 @@
-import {Array} from "@21gram-consulting/plist";
+import {PlistArray, PlistArrayNode} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 import {parse} from "../parse";
 
-export class ArrayExpression extends Expression<Array> {
-  protected resolve(): Array | void {
-    const result: Array = [];
+export class ArrayExpression extends Expression<PlistArrayNode> {
+  protected resolve(): PlistArrayNode | void {
+    const value: PlistArray = [];
+    const children: PlistArrayNode[`children`] = [];
     this.context.commitPresent();
 
     let didClose = false;
@@ -35,13 +36,14 @@ export class ArrayExpression extends Expression<Array> {
 
       const item = parse(this.context);
       if (item === undefined) return this.error(`Failed to parse array item.`);
-      result.push(item);
+      value.push(item.value);
+      children.push(item.node);
       expectComma = true;
     }
 
     if (!didClose) return this.error(`Unclosed array.`);
     this.context.commitPresent();
-    return result;
+    return PlistArrayNode(value, children);
   }
 
 }

@@ -1,71 +1,71 @@
-import {isNode} from "#plist/Node";
+import {isPlistNode} from "#plist/PlistNode";
 
-describe(`isNode`, () => {
+describe(`isPlistNode`, () => {
   describe(`with a type argument`, () => {
     it(`returns true for a valid node`, () => {
-      expect(isNode({type: `STRING`, value: `foo`}, `STRING`)).toBe(true);
+      expect(isPlistNode({type: `STRING`, value: `foo`}, `STRING`)).toBe(true);
     });
 
     it(`returns false for a null input`, () => {
-      expect(isNode(null, `STRING`)).toBe(false);
+      expect(isPlistNode(null, `STRING`)).toBe(false);
     });
 
     it(`returns false for a non-object input`, () => {
-      expect(isNode(123, `STRING`)).toBe(false);
+      expect(isPlistNode(123, `STRING`)).toBe(false);
     });
 
     it(`returns false for a non-node`, () => {
-      expect(isNode({type: `INTEGER`, value: 123}, `STRING`)).toBe(false);
+      expect(isPlistNode({type: `INTEGER`, value: 123}, `STRING`)).toBe(false);
     });
 
     it(`returns false for a node with missing 'type' property`, () => {
-      expect(isNode({value: `foo`}, `STRING`)).toBe(false);
+      expect(isPlistNode({value: `foo`}, `STRING`)).toBe(false);
     });
 
     it(`returns false for a node with missing 'value' property`, () => {
-      expect(isNode({type: `STRING`}, `STRING`)).toBe(false);
+      expect(isPlistNode({type: `STRING`}, `STRING`)).toBe(false);
     });
 
     it(`returns false for a node with incorrect 'type' property`, () => {
-      expect(isNode({type: `NUMBER`, value: `foo`}, `STRING`)).toBe(false);
+      expect(isPlistNode({type: `NUMBER`, value: `foo`}, `STRING`)).toBe(false);
     });
 
     it(`returns true for a node with incorrect 'value' property type, because it's not its responsibility to watch for.`, () => {
-      expect(isNode({type: `STRING`, value: 123}, `STRING`)).toBe(true);
+      expect(isPlistNode({type: `STRING`, value: 123}, `STRING`)).toBe(true);
     });
   });
 
   describe(`without a type argument`, () => {
     it(`returns true for a valid node`, () => {
-      expect(isNode({type: `STRING`, value: `foo`})).toBe(true);
+      expect(isPlistNode({type: `STRING`, value: `foo`})).toBe(true);
     });
 
     it(`returns false for a null input`, () => {
-      expect(isNode(null)).toBe(false);
+      expect(isPlistNode(null)).toBe(false);
     });
 
     it(`returns false for a non-object input`, () => {
-      expect(isNode(123)).toBe(false);
+      expect(isPlistNode(123)).toBe(false);
     });
 
     it(`returns false for a non-node`, () => {
-      expect(isNode({type: `INTEGER`, value: 123})).toBe(false);
+      expect(isPlistNode({type: `INTEGER`, value: 123})).toBe(false);
     });
 
     it(`returns false for a node with missing 'type' property`, () => {
-      expect(isNode({value: `foo`})).toBe(false);
+      expect(isPlistNode({value: `foo`})).toBe(false);
     });
 
     it(`returns false for a node with missing 'value' property`, () => {
-      expect(isNode({type: `STRING`})).toBe(false);
+      expect(isPlistNode({type: `STRING`})).toBe(false);
     });
 
     it(`returns false for a node with incorrect 'type' property`, () => {
-      expect(isNode({type: `NUMBER`, value: `foo`})).toBe(false);
+      expect(isPlistNode({type: `NUMBER`, value: `foo`})).toBe(false);
     });
 
     it(`returns true for a node with incorrect 'value' property type, because it's not its responsibility to watch for.`, () => {
-      expect(isNode({type: `STRING`, value: 123})).toBe(true);
+      expect(isPlistNode({type: `STRING`, value: 123})).toBe(true);
     });
   });
 });

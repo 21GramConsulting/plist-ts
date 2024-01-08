@@ -1,8 +1,8 @@
-import {Comment} from "@21gram-consulting/plist";
+import {PlistCommentNode} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 
-export class CommentExpression extends Expression<Comment> {
-  protected resolve(): Comment | void {
+export class CommentExpression extends Expression<PlistCommentNode> {
+  protected resolve(): PlistCommentNode | void {
     const [first, second] = this.context.present;
     if (first !== `/`) return;
     if (second === `/`) return this.resolveLineComment();
@@ -10,18 +10,18 @@ export class CommentExpression extends Expression<Comment> {
     return this.error(`Second character of comment expression is invalid. Comments should start as "//" or "/*"`);
   }
 
-  private resolveLineComment(): Comment | void {
+  private resolveLineComment(): PlistCommentNode | void {
     this.context.commitPresent();
     while (this.context.hasFuture) {
       this.context.updatePresent();
       if (this.context.present === `\n`) break;
     }
-    const result = this.context.present;
+    const result = PlistCommentNode(this.context.present);
     this.context.commitPresent();
     return result;
   }
 
-  private resolveBlockComment(): Comment | void {
+  private resolveBlockComment(): PlistCommentNode | void {
     this.context.commitPresent();
     let didClose = false;
     while (this.context.hasFuture) {
@@ -32,7 +32,7 @@ export class CommentExpression extends Expression<Comment> {
       }
     }
     if (!didClose) return this.error(`Unclosed block comment.`);
-    const result = this.context.present;
+    const result = PlistCommentNode(this.context.present);
     this.context.commitPresent();
     return result;
   }

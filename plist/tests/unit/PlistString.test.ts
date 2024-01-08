@@ -1,20 +1,20 @@
-import {isStringNode} from "#plist/String";
+import {PlistStringNode, isPlistStringNode} from "#plist/PlistString";
 
-describe(`isStringNode`, () => {
+describe(`isPlistStringNode`, () => {
   describe(`with a string node candidate`, () => {
     it(`should return true`, () => {
       const candidate = {
         type: `STRING`,
         value: `Hello, World!`
       };
-      expect(isStringNode(candidate)).toBe(true);
+      expect(isPlistStringNode(candidate)).toBe(true);
     });
   });
 
   describe(`with a non-node candidate`, () => {
     it(`should return false`, () => {
       const candidate = `Hello, World!`;
-      expect(isStringNode(candidate)).toBe(false);
+      expect(isPlistStringNode(candidate)).toBe(false);
     });
   });
 
@@ -24,7 +24,16 @@ describe(`isStringNode`, () => {
         type: `STRING`,
         value: 123
       };
-      expect(isStringNode(candidate)).toBe(false);
+      expect(isPlistStringNode(candidate)).toBe(false);
+    });
+  });
+});
+
+describe(`PlistStringNode`, () => {
+  it(`should create a string node`, () => {
+    expect(PlistStringNode(`Hello, World!`)).toEqual({
+      type: `STRING`,
+      value: `Hello, World!`
     });
   });
 });

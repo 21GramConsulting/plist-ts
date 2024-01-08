@@ -1,27 +1,27 @@
-import {String} from "@21gram-consulting/plist";
+import {PlistStringNode} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 
-export class StringExpression extends Expression<String> {
+export class StringExpression extends Expression<PlistStringNode> {
   static readonly simple = /^[a-zA-Z0-9_$+/:.-]+$/;
 
-  protected resolve(): String | void {
+  protected resolve(): PlistStringNode | void {
     return this.context.present[0] === `"`
       ? this.resolveProper()
       : this.resolveSimple();
   }
 
-  private resolveSimple(): String | void {
+  private resolveSimple(): PlistStringNode | void {
     this.context.commitPresent();
     while (this.context.hasFuture) {
       if (StringExpression.simple.test(this.context.future[0] ?? ``)) break;
       this.context.updatePresent();
     }
-    const result = this.context.present;
+    const result = PlistStringNode(this.context.present);
     this.context.commitPresent();
     return result;
   }
 
-  private resolveProper(): String | void {
+  private resolveProper(): PlistStringNode | void {
     this.context.commitPresent();
     let didClose = false;
     while (this.context.hasFuture) {
@@ -33,7 +33,7 @@ export class StringExpression extends Expression<String> {
       }
     }
     if (!didClose) return this.error(`Unclosed string.`);
-    const result = this.context.present;
+    const result = PlistStringNode(this.context.present);
     this.context.commitPresent();
     return result;
   }

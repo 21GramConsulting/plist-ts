@@ -1,10 +1,11 @@
-import {Binary} from "@21gram-consulting/plist";
+import {PlistBinaryNode} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 import {CommentFactory} from "./CommentFactory";
 
-export class BinaryExpression extends Expression<Binary> {
-  protected resolve(): Binary | void {
-    const result: number[] = [];
+export class BinaryExpression extends Expression<PlistBinaryNode> {
+  protected resolve(): PlistBinaryNode | void {
+    const bytes: number[] = [];
+    const children: PlistBinaryNode[`children`] = [];
     const commentFactory = new CommentFactory();
 
     this.context.commitPresent();
@@ -12,12 +13,14 @@ export class BinaryExpression extends Expression<Binary> {
     let previousHexBit: HexBit | undefined;
     while (this.context.hasFuture) {
       this.context.updatePresent();
+
       if (commentFactory.couldMatch(this.context)) {
         if (commentFactory.doesMatch(this.context)) {
           const comment = commentFactory.create(this.context);
           if (comment === undefined) return this.error(`Comment could not be created.`);
           if (!comment.isComplete) return this.error(`Incomplete comment.`);
-          comment.value;
+          if (comment.node === undefined) return this.error(`Comment node is undefined.`);
+          children.push(comment.node);
         }
         continue;
       }
@@ -37,7 +40,9 @@ export class BinaryExpression extends Expression<Binary> {
         if (previousHexBit === undefined) {
           previousHexBit = this.context.present;
         } else {
-          result.push(parseInt(previousHexBit.concat(this.context.present), 16));
+          const byte = parseInt(previousHexBit.concat(this.context.present), 16);
+          bytes.push(byte);
+          children.push(PlistBinaryNode(new Uint8Array([byte]), []));
           previousHexBit = undefined;
         }
         this.context.commitPresent();
@@ -50,6 +55,7 @@ export class BinaryExpression extends Expression<Binary> {
     if (!didClose) return this.error(`Unclosed binary.`);
 
     this.context.commitPresent();
+    return PlistBinaryNode(new Uint8Array(bytes), children);
   }
 
 }

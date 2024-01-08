@@ -1,5 +1,6 @@
 import {Expression} from '#old-style/Expression';
 import {Context} from '#old-style/Context';
+import {PlistStringNode} from '@21gram-consulting/plist';
 
 describe(`Expression`, () => {
   let expression: TestExpression;
@@ -59,15 +60,15 @@ describe(`Expression`, () => {
   });
 });
 
-class TestExpression extends Expression<string> {
+class TestExpression extends Expression<PlistStringNode> {
   public shouldSucceed: boolean = true;
   private alreadyExercised: boolean = false;
-  protected resolve(): string | void {
+  protected resolve(): PlistStringNode | void {
     if (this.alreadyExercised) {
       fail(`Expression should not be exercised more than once.`);
     }
     this.alreadyExercised = true;
     if (!this.shouldSucceed) return;
-    return `foo`;
+    return PlistStringNode(`foo`);
   }
 }
