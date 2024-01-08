@@ -11,7 +11,7 @@
   "scripts": {
     "build": "bunchee",
     "types:check": "tsc --noEmit",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist coverage",
     "test:unit": "jest --testPathPattern=tests/unit",
     "test": "jest"
   },

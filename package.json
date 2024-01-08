@@ -38,7 +38,7 @@
   "scripts": {
     "csb:install": "corepack enable && corepack pnpm i",
     "csb:build": "pnpm build",
-    "clean": "pnpm -r run clean && rimraf ./var",
+    "clean": "pnpm -r run clean && rimraf coverage",
     "build": "pnpm -r run build",
     "types:check": "pnpm -r run types:check",
     "test": "pnpm -r run test",
