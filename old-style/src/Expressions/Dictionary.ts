@@ -2,7 +2,7 @@ import {Expression} from "../Expression";
 import {parse} from "../parse";
 
 export class Dictionary extends Expression<Record<string, any>> {
-  protected resolveNode(): Record<string, any> | void {
+  protected resolve(): Record<string, any> | void {
     const result: Record<string, any> = {};
     this.context.commitPresent();
 

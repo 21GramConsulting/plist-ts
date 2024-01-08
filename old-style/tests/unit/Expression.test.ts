@@ -21,7 +21,7 @@ describe(`Expression`, () => {
       });
 
       describe(`#value`, () => {
-        it(`is the result of #resolveNode`, () => {
+        it(`is the result of #resolve`, () => {
           expect(expression.value).toBe(`foo`);
         });
       });
@@ -62,7 +62,7 @@ describe(`Expression`, () => {
 class TestExpression extends Expression<string> {
   public shouldSucceed: boolean = true;
   private alreadyExercised: boolean = false;
-  protected resolveNode(): string | void {
+  protected resolve(): string | void {
     if (this.alreadyExercised) {
       fail(`Expression should not be exercised more than once.`);
     }

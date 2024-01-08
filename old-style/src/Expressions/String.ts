@@ -3,7 +3,7 @@ import {Expression} from "../Expression";
 export class String extends Expression<string> {
   static readonly simple = /^[a-zA-Z0-9_$+/:.-]+$/;
 
-  protected resolveNode(): string | void {
+  protected resolve(): string | void {
     return this.context.present[0] === `"`
       ? this.resolveProper()
       : this.resolveSimple();

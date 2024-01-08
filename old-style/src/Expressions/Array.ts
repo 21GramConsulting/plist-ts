@@ -2,7 +2,7 @@ import {Expression} from "../Expression";
 import {parse} from "../parse";
 
 export class Array extends Expression<any[]> {
-  protected resolveNode(): any[] | void {
+  protected resolve(): any[] | void {
     const result: any[] = [];
     this.context.commitPresent();
 

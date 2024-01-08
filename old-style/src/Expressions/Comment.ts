@@ -1,7 +1,7 @@
 import {Expression} from "../Expression";
 
 export class Comment extends Expression<string> {
-  protected resolveNode(): string | void {
+  protected resolve(): string | void {
     const [first, second] = this.context.present;
     if (first !== `/`) return;
     if (second === `/`) return this.resolveLineComment();
