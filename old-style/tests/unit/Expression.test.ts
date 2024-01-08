@@ -3,9 +3,11 @@ import {Context} from '#old-style/Context';
 
 describe(`Expression`, () => {
   let expression: TestExpression;
+  let context: Context;
 
   beforeEach(() => {
-    expression = new TestExpression(new Context(`foo`));
+    context = new Context(`foo`);
+    expression = new TestExpression(context);
   });
 
   describe(`#value`, () => {
@@ -49,10 +51,10 @@ describe(`Expression`, () => {
   describe(`#error`, () => {
     it(`calls console.error`, () => {
       const spy = jest
-        .spyOn(expression, `error`)
+        .spyOn(context, `console`)
         .mockImplementation(() => {});
       expression.error(`foo`);
-      expect(spy).toHaveBeenCalledWith(`foo`);
+      expect(spy).toHaveBeenCalledWith(`error`, `foo`);
     });
   });
 });
