@@ -1,9 +1,10 @@
+import {Dictionary} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 import {parse} from "../parse";
 
-export class DictionaryExpression extends Expression<Record<string, any>> {
-  protected resolve(): Record<string, any> | void {
-    const result: Record<string, any> = {};
+export class DictionaryExpression extends Expression<Dictionary> {
+  protected resolve(): Dictionary | void {
+    const result: Dictionary = {};
     this.context.commitPresent();
 
     let didClose = false;

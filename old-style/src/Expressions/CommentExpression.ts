@@ -1,7 +1,8 @@
+import {Comment} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 
-export class CommentExpression extends Expression<string> {
-  protected resolve(): string | void {
+export class CommentExpression extends Expression<Comment> {
+  protected resolve(): Comment | void {
     const [first, second] = this.context.present;
     if (first !== `/`) return;
     if (second === `/`) return this.resolveLineComment();
@@ -9,7 +10,7 @@ export class CommentExpression extends Expression<string> {
     return this.error(`Second character of comment expression is invalid. Comments should start as "//" or "/*"`);
   }
 
-  private resolveLineComment(): string | void {
+  private resolveLineComment(): Comment | void {
     this.context.commitPresent();
     while (this.context.hasFuture) {
       this.context.updatePresent();
@@ -20,7 +21,7 @@ export class CommentExpression extends Expression<string> {
     return result;
   }
 
-  private resolveBlockComment(): string | void {
+  private resolveBlockComment(): Comment | void {
     this.context.commitPresent();
     let didClose = false;
     while (this.context.hasFuture) {

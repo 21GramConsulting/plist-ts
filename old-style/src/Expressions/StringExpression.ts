@@ -1,15 +1,16 @@
+import {String} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 
-export class StringExpression extends Expression<string> {
+export class StringExpression extends Expression<String> {
   static readonly simple = /^[a-zA-Z0-9_$+/:.-]+$/;
 
-  protected resolve(): string | void {
+  protected resolve(): String | void {
     return this.context.present[0] === `"`
       ? this.resolveProper()
       : this.resolveSimple();
   }
 
-  private resolveSimple(): string | void {
+  private resolveSimple(): String | void {
     this.context.commitPresent();
     while (this.context.hasFuture) {
       if (StringExpression.simple.test(this.context.future[0] ?? ``)) break;
@@ -20,7 +21,7 @@ export class StringExpression extends Expression<string> {
     return result;
   }
 
-  private resolveProper(): string | void {
+  private resolveProper(): String | void {
     this.context.commitPresent();
     let didClose = false;
     while (this.context.hasFuture) {

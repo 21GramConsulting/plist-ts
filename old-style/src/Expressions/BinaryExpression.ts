@@ -1,8 +1,9 @@
+import {Binary} from "@21gram-consulting/plist";
 import {Expression} from "../Expression";
 import {CommentFactory} from "./CommentFactory";
 
-export class BinaryExpression extends Expression<Uint8Array> {
-  protected resolve(): Uint8Array | void {
+export class BinaryExpression extends Expression<Binary> {
+  protected resolve(): Binary | void {
     const result: number[] = [];
     const commentFactory = new CommentFactory();
 
