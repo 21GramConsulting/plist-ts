@@ -1,6 +1,6 @@
 import {Expression} from "../Expression";
 
-export class String extends Expression<string> {
+export class StringExpression extends Expression<string> {
   static readonly simple = /^[a-zA-Z0-9_$+/:.-]+$/;
 
   protected resolve(): string | void {
@@ -12,7 +12,7 @@ export class String extends Expression<string> {
   private resolveSimple(): string | void {
     this.context.commitPresent();
     while (this.context.hasFuture) {
-      if (String.simple.test(this.context.future[0] ?? ``)) break;
+      if (StringExpression.simple.test(this.context.future[0] ?? ``)) break;
       this.context.updatePresent();
     }
     const result = this.context.present;

@@ -1,8 +1,8 @@
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
-import {Array} from "./Array";
+import {ArrayExpression} from "./ArrayExpression";
 
-export class ArrayFactory implements ExpressionFactory<Array> {
+export class ArrayFactory implements ExpressionFactory<ArrayExpression> {
   doesMatch(context: Context): boolean {
     return this.couldMatch(context);
   }
@@ -13,8 +13,8 @@ export class ArrayFactory implements ExpressionFactory<Array> {
     return context.present === `(`;
   }
 
-  create(context: Context): Array | void {
+  create(context: Context): ArrayExpression | void {
     if (!this.doesMatch(context)) return context.console(`error`, `Context does not match an array.`);
-    return new Array(context);
+    return new ArrayExpression(context);
   }
 }

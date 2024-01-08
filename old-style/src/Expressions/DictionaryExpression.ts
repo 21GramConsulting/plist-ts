@@ -1,7 +1,7 @@
 import {Expression} from "../Expression";
 import {parse} from "../parse";
 
-export class Dictionary extends Expression<Record<string, any>> {
+export class DictionaryExpression extends Expression<Record<string, any>> {
   protected resolve(): Record<string, any> | void {
     const result: Record<string, any> = {};
     this.context.commitPresent();

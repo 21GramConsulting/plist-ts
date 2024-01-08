@@ -1,8 +1,8 @@
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
-import {Binary} from "./Binary";
+import {BinaryExpression} from "./BinaryExpression";
 
-export class BinaryFactory implements ExpressionFactory<Binary> {
+export class BinaryFactory implements ExpressionFactory<BinaryExpression> {
   doesMatch(context: Context): boolean {
     return this.couldMatch(context);
   }
@@ -13,8 +13,8 @@ export class BinaryFactory implements ExpressionFactory<Binary> {
     return false;
   }
 
-  create(context: Context): Binary | void {
+  create(context: Context): BinaryExpression | void {
     if (!this.doesMatch(context)) return context.console(`error`, `Context does not match Binary.`);
-    return new Binary(context);
+    return new BinaryExpression(context);
   }
 }

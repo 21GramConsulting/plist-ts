@@ -1,6 +1,6 @@
 import {Expression} from "../Expression";
 
-export class Comment extends Expression<string> {
+export class CommentExpression extends Expression<string> {
   protected resolve(): string | void {
     const [first, second] = this.context.present;
     if (first !== `/`) return;

@@ -1,8 +1,8 @@
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
-import {Dictionary} from "./Dictionary";
+import {DictionaryExpression} from "./DictionaryExpression";
 
-export class DictionaryFactory implements ExpressionFactory<Dictionary> {
+export class DictionaryFactory implements ExpressionFactory<DictionaryExpression> {
   doesMatch(context: Context): boolean {
     return this.couldMatch(context);
   }
@@ -13,8 +13,8 @@ export class DictionaryFactory implements ExpressionFactory<Dictionary> {
     return context.present === `{`;
   }
 
-  create(context: Context): Dictionary | void {
+  create(context: Context): DictionaryExpression | void {
     if (!this.doesMatch(context)) return context.console(`error`, `Context does not match a Dictionary.`);
-    return new Dictionary(context);
+    return new DictionaryExpression(context);
   }
 }
