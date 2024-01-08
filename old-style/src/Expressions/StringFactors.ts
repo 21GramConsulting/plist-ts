@@ -15,7 +15,7 @@ export class StringFactory implements ExpressionFactory<String> {
   }
 
   create(context: Context): String | void {
-    if (!this.doesMatch(context)) return error(`Context does not match a String.`);
+    if (!this.doesMatch(context)) return this.error(`Context does not match a String.`);
     return new String(context);
   }
 }

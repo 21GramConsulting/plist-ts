@@ -15,7 +15,7 @@ export class DictionaryFactory implements ExpressionFactory<Dictionary> {
   }
 
   create(context: Context): Dictionary | void {
-    if (!this.doesMatch(context)) return error(`Context does not match a Dictionary.`);
+    if (!this.doesMatch(context)) return this.error(`Context does not match a Dictionary.`);
     return new Dictionary(context);
   }
 }

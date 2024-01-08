@@ -26,18 +26,18 @@ export class Dictionary extends Expression<Record<string, any>> {
       }
 
       if (expectSemicolon) {
-        if (this.context.present !== `;`) return error(`Expected semicolon.`);
+        if (this.context.present !== `;`) return this.error(`Expected semicolon.`);
         this.context.commitPresent();
         expectSemicolon = false;
         continue;
       }
 
-      if (this.context.present === `;`) return error(`Unexpected semicolon.`);
+      if (this.context.present === `;`) return this.error(`Unexpected semicolon.`);
 
       const item = parse(this.context);
-      if (item === undefined) return error(`Failed to parse Dictionary item.`);
+      if (item === undefined) return this.error(`Failed to parse Dictionary item.`);
       if (key === undefined) {
-        if (typeof item !== `string`) return error(`Expected string key.`);
+        if (typeof item !== `string`) return this.error(`Expected string key.`);
         key = item;
       } else {
         result[key] = item;
@@ -47,7 +47,7 @@ export class Dictionary extends Expression<Record<string, any>> {
       expectSemicolon = true;
     }
 
-    if (!didClose) return error(`Unclosed Dictionary.`);
+    if (!didClose) return this.error(`Unclosed Dictionary.`);
     this.context.commitPresent();
     return result;
   }

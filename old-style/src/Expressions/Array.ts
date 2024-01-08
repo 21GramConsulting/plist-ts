@@ -25,21 +25,21 @@ export class Array extends Expression<any[]> {
       }
 
       if (expectComma) {
-        if (this.context.present !== `,`) return error(`Expected comma.`);
+        if (this.context.present !== `,`) return this.error(`Expected comma.`);
         this.context.commitPresent();
         expectComma = false;
         continue;
       }
 
-      if (this.context.present === `,`) return error(`Unexpected comma.`);
+      if (this.context.present === `,`) return this.error(`Unexpected comma.`);
 
       const item = parse(this.context);
-      if (item === undefined) return error(`Failed to parse array item.`);
+      if (item === undefined) return this.error(`Failed to parse array item.`);
       result.push(item);
       expectComma = true;
     }
 
-    if (!didClose) return error(`Unclosed array.`);
+    if (!didClose) return this.error(`Unclosed array.`);
     this.context.commitPresent();
     return result;
   }

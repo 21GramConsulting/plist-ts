@@ -45,6 +45,14 @@ describe(`Expression`, () => {
       });
     });
   });
+
+  describe(`#error`, () => {
+    it(`calls console.error`, () => {
+      const spy = jest.spyOn(expression, `error`);
+      expression.error(`foo`);
+      expect(spy).toHaveBeenCalledWith(`foo`);
+    });
+  });
 });
 
 class TestExpression extends Expression<string> {

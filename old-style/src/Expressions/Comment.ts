@@ -7,7 +7,7 @@ export class Comment extends Expression<string> {
     if (first !== `/`) return;
     if (second === `/`) return this.resolveLineComment();
     if (second === `*`) return this.resolveBlockComment();
-    return error(`Second character of comment expression is invalid. Comments should start as "//" or "/*"`);
+    return this.error(`Second character of comment expression is invalid. Comments should start as "//" or "/*"`);
   }
 
   private resolveLineComment(): string | void {
@@ -31,7 +31,7 @@ export class Comment extends Expression<string> {
         break;
       }
     }
-    if (!didClose) return error(`Unclosed block comment.`);
+    if (!didClose) return this.error(`Unclosed block comment.`);
     const result = this.context.present;
     this.context.commitPresent();
     return result;

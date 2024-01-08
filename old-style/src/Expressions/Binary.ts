@@ -15,8 +15,8 @@ export class Binary extends Expression<Uint8Array> {
       if (commentFactory.couldMatch(this.context)) {
         if (commentFactory.doesMatch(this.context)) {
           const comment = commentFactory.create(this.context);
-          if (comment === undefined) return error(`Comment could not be created.`);
-          if (!comment.isComplete) return error(`Incomplete comment.`);
+          if (comment === undefined) return this.error(`Comment could not be created.`);
+          if (!comment.isComplete) return this.error(`Incomplete comment.`);
           comment.value;
         }
         continue;
@@ -44,10 +44,10 @@ export class Binary extends Expression<Uint8Array> {
         continue;
       }
 
-      return error(`Unexpected character in binary: ${this.context.present}`);
+      return this.error(`Unexpected character in binary: ${this.context.present}`);
     }
 
-    if (!didClose) return error(`Unclosed binary.`);
+    if (!didClose) return this.error(`Unclosed binary.`);
 
     this.context.commitPresent();
   }

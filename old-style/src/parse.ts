@@ -23,7 +23,7 @@ export function parse(input: any): any {
 
   while (filter.undecided) {
     context.updatePresent();
-    if (filter.outOfOptions) return error(`Failed to parse input.`);
+    if (filter.outOfOptions) return context.console(`error`, `Failed to parse input.`);
   }
 
   return filter.expression?.value;

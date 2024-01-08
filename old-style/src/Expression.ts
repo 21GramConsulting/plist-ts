@@ -9,6 +9,8 @@ export abstract class Expression<Value> {
     this.context = context;
   }
 
+  public error(message: string): void {this.context.console(`error`, message);}
+
   public get value(): Value | void {
     if (!this.isComplete) {
       const result = this.resolve();

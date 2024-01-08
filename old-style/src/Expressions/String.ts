@@ -32,7 +32,7 @@ export class String extends Expression<string> {
         break;
       }
     }
-    if (!didClose) return error(`Unclosed string.`);
+    if (!didClose) return this.error(`Unclosed string.`);
     const result = this.context.present;
     this.context.commitPresent();
     return result;

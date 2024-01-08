@@ -15,7 +15,7 @@ export class BinaryFactory implements ExpressionFactory<Binary> {
   }
 
   create(context: Context): Binary | void {
-    if (!this.doesMatch(context)) return error(`Context does not match Binary.`);
+    if (!this.doesMatch(context)) return this.error(`Context does not match Binary.`);
     return new Binary(context);
   }
 }
