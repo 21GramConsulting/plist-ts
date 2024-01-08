@@ -4,6 +4,7 @@ import {error} from "console";
 import {StringFactory} from "./Expressions/StringFactors";
 import {CommentFactory} from "./Expressions/CommentFactory";
 import {ArrayFactory} from "./Expressions/ArrayFactory";
+import {BinaryFactory, DictionaryFactory} from ".";
 
 export function parse(input: Parsable): any;
 export function parse(input: string): any;
@@ -15,7 +16,9 @@ export function parse(input: any): any {
   const factory = new ExpressionFilterFactory([
     new StringFactory(),
     new CommentFactory(),
-    new ArrayFactory()
+    new ArrayFactory(),
+    new DictionaryFactory(),
+    new BinaryFactory()
   ]);
 
   const filter = factory.create(parsable);
