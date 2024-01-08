@@ -13,12 +13,12 @@ export abstract class Expression<Value> {
 
   public get value(): Value | void {
     if (!this.isComplete) {
-      const result = this.resolve();
+      const result = this.resolveNode();
       this.result = result;
       this.isComplete = true;
     }
     return this.result;
   }
 
-  protected abstract resolve(): Value | void;
+  protected abstract resolveNode(): Value | void;
 }

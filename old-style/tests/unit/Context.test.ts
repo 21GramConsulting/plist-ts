@@ -3,38 +3,38 @@ import {Context} from '#old-style/Context';
 describe(`Context`, () => {
   describe(`with an empty string as input`, () => {
     describe(`#whole`, () => {
-      it(`is an empty string`, () => {expect(new Context(`value`, ``).whole).toBe(``);});
+      it(`is an empty string`, () => {expect(new Context(``).whole).toBe(``);});
     });
 
     describe(`#past`, () => {
-      it(`is an empty string`, () => {expect(new Context(`value`, ``).past).toBe(``);});
+      it(`is an empty string`, () => {expect(new Context(``).past).toBe(``);});
     });
 
     describe(`#present`, () => {
-      it(`is an empty string`, () => {expect(new Context(`value`, ``).present).toBe(``);});
+      it(`is an empty string`, () => {expect(new Context(``).present).toBe(``);});
     });
 
     describe(`#future`, () => {
-      it(`is an empty string`, () => {expect(new Context(`value`, ``).future).toBe(``);});
+      it(`is an empty string`, () => {expect(new Context(``).future).toBe(``);});
     });
 
     describe(`#hasFuture`, () => {
-      it(`is false`, () => {expect(new Context(`value`, ``).hasFuture).toBe(false);});
+      it(`is false`, () => {expect(new Context(``).hasFuture).toBe(false);});
     });
 
     describe(`#updatePresent`, () => {
-      it(`does nothing`, () => {expect(new Context(`value`, ``).updatePresent()).toBeUndefined();});
+      it(`does nothing`, () => {expect(new Context(``).updatePresent()).toBeUndefined();});
     });
 
     describe(`#commitPresent`, () => {
-      it(`does nothing`, () => {expect(new Context(`value`, ``).commitPresent()).toBeUndefined();});
+      it(`does nothing`, () => {expect(new Context(``).commitPresent()).toBeUndefined();});
     });
 
     describe(`#console`, () => {
       const log = jest.spyOn(console, `log`).mockImplementation(() => {});
 
       it(`Logs with additional information.`, () => {
-        expect(new Context(`value`, ``).console(`log`, `foo`)).toBeUndefined();
+        expect(new Context(``).console(`log`, `foo`)).toBeUndefined();
         expect(log).toHaveBeenCalledWith(`foo`, `line 1, column 1`);
       });
     });
@@ -42,20 +42,20 @@ describe(`Context`, () => {
 
   describe(`with some string as input`, () => {
     describe(`#whole`, () => {
-      it(`is the input string`, () => {expect(new Context(`value`, `foo`).whole).toBe(`foo`);});
+      it(`is the input string`, () => {expect(new Context(`foo`).whole).toBe(`foo`);});
     });
 
     describe(`#past`, () => {
-      it(`is an empty string`, () => {expect(new Context(`value`, `foo`).past).toBe(``);});
+      it(`is an empty string`, () => {expect(new Context(`foo`).past).toBe(``);});
     });
 
     describe(`#present`, () => {
       it(`should be initially empty`, () => {
-        expect(new Context(`value`, `foo`).present).toBe(``);
+        expect(new Context(`foo`).present).toBe(``);
       });
 
       it(`should be updated by #updatePresent`, () => {
-        const context = new Context(`value`, `foo`);
+        const context = new Context(`foo`);
         context.updatePresent();
         expect(context.present).toBe(`f`);
       });
@@ -63,11 +63,11 @@ describe(`Context`, () => {
 
     describe(`#future`, () => {
       it(`should be initially the whole string`, () => {
-        expect(new Context(`value`, `foo`).future).toBe(`foo`);
+        expect(new Context(`foo`).future).toBe(`foo`);
       });
 
       it(`should be updated by #updatePresent`, () => {
-        const context = new Context(`value`, `foo`);
+        const context = new Context(`foo`);
         context.updatePresent();
         expect(context.future).toBe(`oo`);
         context.updatePresent();
@@ -81,11 +81,11 @@ describe(`Context`, () => {
 
     describe(`#hasFuture`, () => {
       it(`should be initially true`, () => {
-        expect(new Context(`value`, `foo`).hasFuture).toBe(true);
+        expect(new Context(`foo`).hasFuture).toBe(true);
       });
 
       it(`should be updated by #updatePresent`, () => {
-        const context = new Context(`value`, `foo`);
+        const context = new Context(`foo`);
         context.updatePresent();
         expect(context.hasFuture).toBe(true);
         context.updatePresent();
@@ -101,7 +101,7 @@ describe(`Context`, () => {
       const log = jest.spyOn(console, `log`).mockImplementation(() => {});
 
       it(`Logs with additional information.`, () => {
-        const context = new Context(`value`, `foo\nbar`);
+        const context = new Context(`foo\nbar`);
         expect(log).toHaveBeenCalledWith(`foo`, `line 1, column 1`);
         context.updatePresent();
         expect(context.console(`log`, `foo`));
@@ -122,10 +122,4 @@ describe(`Context`, () => {
     });
   });
 
-  describe(`#intent`, () => {
-    it(`is the intent passed to the constructor`, () => {
-      expect(new Context(`value`, ``).intent).toBe(`value`);
-      expect(new Context(`tree`, ``).intent).toBe(`tree`);
-    });
-  });
 });

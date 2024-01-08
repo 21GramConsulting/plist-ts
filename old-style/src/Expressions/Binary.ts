@@ -2,7 +2,7 @@ import {Expression} from "../Expression";
 import {CommentFactory} from "./CommentFactory";
 
 export class Binary extends Expression<Uint8Array> {
-  protected resolve(): Uint8Array | void {
+  protected resolveNode(): Uint8Array | void {
     const result: number[] = [];
     const commentFactory = new CommentFactory();
 
