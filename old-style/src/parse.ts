@@ -3,7 +3,8 @@ import {ExpressionFilter} from "./ExpressionFilter";
 import {StringFactory} from "./Expressions/StringFactors";
 import {CommentFactory} from "./Expressions/CommentFactory";
 import {ArrayFactory} from "./Expressions/ArrayFactory";
-import {BinaryFactory, DictionaryFactory} from ".";
+import {BinaryFactory} from "./Expressions/BinaryFactory";
+import {DictionaryFactory} from "./Expressions/DictionaryFactory";
 
 export function parse(input: Context): any;
 export function parse(input: string): any;
