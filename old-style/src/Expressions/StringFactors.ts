@@ -1,4 +1,3 @@
-import {error} from "console";
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
 import {String} from "./String";
@@ -15,7 +14,7 @@ export class StringFactory implements ExpressionFactory<String> {
   }
 
   create(context: Context): String | void {
-    if (!this.doesMatch(context)) return this.error(`Context does not match a String.`);
+    if (!this.doesMatch(context)) return context.console(`error`, `Context does not match a String.`);
     return new String(context);
   }
 }

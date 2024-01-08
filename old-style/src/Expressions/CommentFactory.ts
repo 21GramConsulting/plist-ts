@@ -1,4 +1,3 @@
-import {error} from "console";
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
 import {Comment} from "./Comment";
@@ -24,7 +23,7 @@ export class CommentFactory implements ExpressionFactory<Comment> {
   }
 
   create(context: Context): Comment | void {
-    if (!this.doesMatch(context)) return this.error(`Context does not match Comment.`);
+    if (!this.doesMatch(context)) return context.console(`error`, `Context does not match Comment.`);
     return new Comment(context);
   }
 }

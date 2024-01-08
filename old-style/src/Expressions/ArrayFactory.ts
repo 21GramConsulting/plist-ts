@@ -1,4 +1,3 @@
-import {error} from "console";
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
 import {Array} from "./Array";
@@ -15,7 +14,7 @@ export class ArrayFactory implements ExpressionFactory<Array> {
   }
 
   create(context: Context): Array | void {
-    if (!this.doesMatch(context)) return this.error(`Context does not match an array.`);
+    if (!this.doesMatch(context)) return context.console(`error`, `Context does not match an array.`);
     return new Array(context);
   }
 }

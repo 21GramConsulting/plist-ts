@@ -1,4 +1,3 @@
-import {error} from "console";
 import {Expression} from "../Expression";
 import {parse} from "../parse";
 

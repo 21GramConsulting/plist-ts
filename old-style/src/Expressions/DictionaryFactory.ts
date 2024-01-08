@@ -1,4 +1,3 @@
-import {error} from "console";
 import {ExpressionFactory} from "../ExpressionFactory";
 import {Context} from "../Context";
 import {Dictionary} from "./Dictionary";
@@ -15,7 +14,7 @@ export class DictionaryFactory implements ExpressionFactory<Dictionary> {
   }
 
   create(context: Context): Dictionary | void {
-    if (!this.doesMatch(context)) return this.error(`Context does not match a Dictionary.`);
+    if (!this.doesMatch(context)) return context.console(`error`, `Context does not match a Dictionary.`);
     return new Dictionary(context);
   }
 }

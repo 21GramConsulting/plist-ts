@@ -1,4 +1,3 @@
-import {error} from "console";
 import {Expression} from "../Expression";
 
 export class Comment extends Expression<string> {
