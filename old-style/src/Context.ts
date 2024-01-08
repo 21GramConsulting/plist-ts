@@ -2,6 +2,7 @@ import {ConditionalKeys} from "type-fest";
 
 export class Context {
   public readonly whole: string;
+  public readonly intent: Intent;
 
   private window: {start: number, end: number};
   private humanFriendlyPosition = {line: 1, column: 1};
@@ -22,7 +23,8 @@ export class Context {
     return this.window.end < this.whole.length;
   }
 
-  constructor(input: string) {
+  constructor(intent: Intent, input: string) {
+    this.intent = intent;
     this.whole = input;
     this.window = {start: 0, end: 0};
   }
@@ -53,3 +55,5 @@ export class Context {
   }
 
 }
+
+export type Intent = `value` | `tree`;
