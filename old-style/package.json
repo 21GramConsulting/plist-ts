@@ -11,9 +11,14 @@
   "scripts": {
     "build": "bunchee",
     "types:check": "tsc --noEmit",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test:unit": "jest --testPathPattern=tests/unit",
+    "test": "jest"
   },
   "peerDependencies": {
     "@adam-rocska/plist": "*"
+  },
+  "devDependencies": {
+    "type-fest": "4.9.0"
   }
 }

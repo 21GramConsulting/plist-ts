@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@adam-rocska/plist": [ "plist/src/index.ts" ],
+      "@adam-rocska/plist/old-style": [ "old-style/src/index.ts" ],
+      "#plist/*": [ "plist/src/*" ],
+      "#old-style/*": [ "old-style/src/*" ]
+    }
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}

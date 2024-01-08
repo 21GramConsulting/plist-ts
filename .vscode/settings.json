@@ -1,0 +1,25 @@
+{
+  "jest.runMode": {
+    "type": "on-save",
+    "testFileOnly": true,
+    "coverage": true
+  },
+  "jest.coverageFormatter": "GutterFormatter",
+  "testing.openTesting": "openOnTestFailure",
+  "jest.outputConfig": {
+    "revealOn": "error",
+    "revealWithFocus": "test-results"
+  },
+  "jest.virtualFolders": [
+    { "name": "plist", "rootPath": "./plist/" },
+    { "name": "old-style", "rootPath": "./old-style/" }
+  ],
+  "VSCodeCounter.exclude": [
+    "**/.gitignore",
+    "**/.vscode/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "pnpm-lock.yaml",
+  ]
+}
