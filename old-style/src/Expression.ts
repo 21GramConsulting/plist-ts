@@ -12,13 +12,15 @@ export abstract class Expression<Value> {
   public error(message: string): void {this.context.console(`error`, message);}
 
   public get value(): Value | void {
-    if (!this.isComplete) {
-      const result = this.resolve();
-      this.result = result;
-      this.isComplete = true;
-    }
+    this.assureCompletion();
     return this.result;
   }
 
   protected abstract resolve(): Value | void;
+  private assureCompletion() {
+    if (this.isComplete) return;
+    const result = this.resolve();
+    this.result = result;
+    this.isComplete = true;
+  }
 }
