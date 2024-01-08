@@ -1,21 +1,21 @@
 import {error} from "console";
 import {ExpressionFactory} from "../ExpressionFactory";
-import {Parsable} from "../Parsable";
+import {Context} from "../Context";
 import {Array} from "./Array";
 
 export class ArrayFactory implements ExpressionFactory<Array> {
-  doesMatch(parsable: Parsable): boolean {
-    return this.couldMatch(parsable);
+  doesMatch(context: Context): boolean {
+    return this.couldMatch(context);
   }
 
-  couldMatch(parsable: Parsable): boolean {
-    if (!parsable.hasFuture) return false;
-    if (parsable.present !== `(`) return false;
-    return parsable.present === `(`;
+  couldMatch(context: Context): boolean {
+    if (!context.hasFuture) return false;
+    if (context.present !== `(`) return false;
+    return context.present === `(`;
   }
 
-  create(parsable: Parsable): Array | void {
-    if (!this.doesMatch(parsable)) return error(`Parsable does not match an array.`);
-    return new Array(parsable);
+  create(context: Context): Array | void {
+    if (!this.doesMatch(context)) return error(`Context does not match an array.`);
+    return new Array(context);
   }
 }

@@ -1,21 +1,21 @@
 import {error} from "console";
 import {ExpressionFactory} from "../ExpressionFactory";
-import {Parsable} from "../Parsable";
+import {Context} from "../Context";
 import {String} from "./String";
 
 export class StringFactory implements ExpressionFactory<String> {
-  doesMatch(parsable: Parsable): boolean {
-    return this.couldMatch(parsable);
+  doesMatch(context: Context): boolean {
+    return this.couldMatch(context);
   }
 
-  couldMatch(parsable: Parsable): boolean {
-    if (!parsable.hasFuture) return false;
-    if (parsable.present === `"`) return true;
-    return String.simple.test(parsable.present);
+  couldMatch(context: Context): boolean {
+    if (!context.hasFuture) return false;
+    if (context.present === `"`) return true;
+    return String.simple.test(context.present);
   }
 
-  create(parsable: Parsable): String | void {
-    if (!this.doesMatch(parsable)) return error(`Parsable does not match a String.`);
-    return new String(parsable);
+  create(context: Context): String | void {
+    if (!this.doesMatch(context)) return error(`Context does not match a String.`);
+    return new String(context);
   }
 }

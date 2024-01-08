@@ -5,36 +5,36 @@ import {parse} from "../parse";
 export class Dictionary extends Expression<Record<string, any>> {
   protected resolve(): Record<string, any> | void {
     const result: Record<string, any> = {};
-    this.parsable.commitPresent();
+    this.context.commitPresent();
 
     let didClose = false;
     let expectSemicolon = false;
     let key: string | undefined;
 
-    while (this.parsable.hasFuture) {
-      this.parsable.updatePresent();
+    while (this.context.hasFuture) {
+      this.context.updatePresent();
 
-      if (/\s/.test(this.parsable.present)) {
-        this.parsable.commitPresent();
+      if (/\s/.test(this.context.present)) {
+        this.context.commitPresent();
         continue;
       }
 
-      if (this.parsable.present === `}`) {
+      if (this.context.present === `}`) {
         didClose = true;
-        this.parsable.commitPresent();
+        this.context.commitPresent();
         break;
       }
 
       if (expectSemicolon) {
-        if (this.parsable.present !== `;`) return error(`Expected semicolon.`);
-        this.parsable.commitPresent();
+        if (this.context.present !== `;`) return error(`Expected semicolon.`);
+        this.context.commitPresent();
         expectSemicolon = false;
         continue;
       }
 
-      if (this.parsable.present === `;`) return error(`Unexpected semicolon.`);
+      if (this.context.present === `;`) return error(`Unexpected semicolon.`);
 
-      const item = parse(this.parsable);
+      const item = parse(this.context);
       if (item === undefined) return error(`Failed to parse Dictionary item.`);
       if (key === undefined) {
         if (typeof item !== `string`) return error(`Expected string key.`);
@@ -48,7 +48,7 @@ export class Dictionary extends Expression<Record<string, any>> {
     }
 
     if (!didClose) return error(`Unclosed Dictionary.`);
-    this.parsable.commitPresent();
+    this.context.commitPresent();
     return result;
   }
 

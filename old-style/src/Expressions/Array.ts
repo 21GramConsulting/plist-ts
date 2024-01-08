@@ -5,42 +5,42 @@ import {parse} from "../parse";
 export class Array extends Expression<any[]> {
   protected resolve(): any[] | void {
     const result: any[] = [];
-    this.parsable.commitPresent();
+    this.context.commitPresent();
 
     let didClose = false;
     let expectComma = false;
 
-    while (this.parsable.hasFuture) {
-      this.parsable.updatePresent();
+    while (this.context.hasFuture) {
+      this.context.updatePresent();
 
-      if (/\s/.test(this.parsable.present)) {
-        this.parsable.commitPresent();
+      if (/\s/.test(this.context.present)) {
+        this.context.commitPresent();
         continue;
       }
 
-      if (this.parsable.present === `)`) {
+      if (this.context.present === `)`) {
         didClose = true;
-        this.parsable.commitPresent();
+        this.context.commitPresent();
         break;
       }
 
       if (expectComma) {
-        if (this.parsable.present !== `,`) return error(`Expected comma.`);
-        this.parsable.commitPresent();
+        if (this.context.present !== `,`) return error(`Expected comma.`);
+        this.context.commitPresent();
         expectComma = false;
         continue;
       }
 
-      if (this.parsable.present === `,`) return error(`Unexpected comma.`);
+      if (this.context.present === `,`) return error(`Unexpected comma.`);
 
-      const item = parse(this.parsable);
+      const item = parse(this.context);
       if (item === undefined) return error(`Failed to parse array item.`);
       result.push(item);
       expectComma = true;
     }
 
     if (!didClose) return error(`Unclosed array.`);
-    this.parsable.commitPresent();
+    this.context.commitPresent();
     return result;
   }
 

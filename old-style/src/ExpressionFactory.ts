@@ -1,9 +1,9 @@
 import {Expression} from "./Expression";
-import {Parsable} from "./Parsable";
+import {Context} from "./Context";
 
 export interface ExpressionFactory<E extends Expression<any>> {
-  couldMatch(parsable: Parsable): boolean;
-  doesMatch(parsable: Parsable): boolean;
+  couldMatch(context: Context): boolean;
+  doesMatch(context: Context): boolean;
 
-  create(cloning: Parsable): E | void;
+  create(cloning: Context): E | void;
 }

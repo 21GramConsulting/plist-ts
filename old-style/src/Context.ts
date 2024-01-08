@@ -1,6 +1,6 @@
 import {ConditionalKeys} from "type-fest";
 
-export class Parsable {
+export class Context {
   public readonly whole: string;
 
   private window: {start: number, end: number};

@@ -1,17 +1,17 @@
 import {Expression} from "./Expression";
 import {ExpressionFactory} from "./ExpressionFactory";
-import {Parsable} from "./Parsable";
+import {Context} from "./Context";
 
 export class ExpressionFilter {
-  public readonly parsable: Parsable;
+  public readonly context: Context;
   private expressions: ExpressionFactory<any>[];
 
   constructor(
-    parsable: Parsable,
+    context: Context,
     expressions: ExpressionFactory<any>[]
   ) {
     this.expressions = expressions;
-    this.parsable = parsable;
+    this.context = context;
   }
 
   public get outOfOptions(): boolean {
@@ -25,7 +25,7 @@ export class ExpressionFilter {
   public get expression(): Expression<any> | void {
     if (this.outOfOptions) return;
     if (this.undecided) return;
-    return this.expressions[0]?.create(this.parsable);
+    return this.expressions[0]?.create(this.context);
   }
 
 }

@@ -1,12 +1,12 @@
-import {Parsable} from "./Parsable";
+import {Context} from "./Context";
 
 export abstract class Expression<Value> {
   public isComplete: boolean = false;
-  protected readonly parsable: Parsable;
+  protected readonly context: Context;
   private result: Value | void = undefined;
 
-  constructor(parsable: Parsable) {
-    this.parsable = parsable;
+  constructor(context: Context) {
+    this.context = context;
   }
 
   public get value(): Value | void {

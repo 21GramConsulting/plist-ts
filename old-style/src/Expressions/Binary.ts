@@ -7,14 +7,14 @@ export class Binary extends Expression<Uint8Array> {
     const result: number[] = [];
     const commentFactory = new CommentFactory();
 
-    this.parsable.commitPresent();
+    this.context.commitPresent();
     let didClose = false;
     let previousHexBit: HexBit | undefined;
-    while (this.parsable.hasFuture) {
-      this.parsable.updatePresent();
-      if (commentFactory.couldMatch(this.parsable)) {
-        if (commentFactory.doesMatch(this.parsable)) {
-          const comment = commentFactory.create(this.parsable);
+    while (this.context.hasFuture) {
+      this.context.updatePresent();
+      if (commentFactory.couldMatch(this.context)) {
+        if (commentFactory.doesMatch(this.context)) {
+          const comment = commentFactory.create(this.context);
           if (comment === undefined) return error(`Comment could not be created.`);
           if (!comment.isComplete) return error(`Incomplete comment.`);
           comment.value;
@@ -22,34 +22,34 @@ export class Binary extends Expression<Uint8Array> {
         continue;
       }
 
-      if (/\s/.test(this.parsable.present)) {
-        this.parsable.commitPresent();
+      if (/\s/.test(this.context.present)) {
+        this.context.commitPresent();
         continue;
       }
 
-      if (this.parsable.present === `>`) {
+      if (this.context.present === `>`) {
         didClose = true;
-        this.parsable.commitPresent();
+        this.context.commitPresent();
         break;
       }
 
-      if (isHexBit(this.parsable.present)) {
+      if (isHexBit(this.context.present)) {
         if (previousHexBit === undefined) {
-          previousHexBit = this.parsable.present;
+          previousHexBit = this.context.present;
         } else {
-          result.push(parseInt(previousHexBit.concat(this.parsable.present), 16));
+          result.push(parseInt(previousHexBit.concat(this.context.present), 16));
           previousHexBit = undefined;
         }
-        this.parsable.commitPresent();
+        this.context.commitPresent();
         continue;
       }
 
-      return error(`Unexpected character in binary: ${this.parsable.present}`);
+      return error(`Unexpected character in binary: ${this.context.present}`);
     }
 
     if (!didClose) return error(`Unclosed binary.`);
 
-    this.parsable.commitPresent();
+    this.context.commitPresent();
   }
 
 }

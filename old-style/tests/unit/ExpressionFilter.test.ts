@@ -1,10 +1,10 @@
 import {Expression} from '#old-style/Expression';
 import {ExpressionFactory} from '#old-style/ExpressionFactory';
 import {ExpressionFilter} from '#old-style/ExpressionFilter';
-import {Parsable} from '#old-style/Parsable';
+import {Context} from '#old-style/Context';
 
 describe(`ExpressionFilter`, () => {
-  const stubParsable = new Parsable(``);
+  const stubParsable = new Context(``);
 
   describe(`#outOfOptions`, () => {
     it(`returns true when there are no expressions`, () => {

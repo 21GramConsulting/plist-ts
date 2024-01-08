@@ -1,11 +1,11 @@
 import {Expression} from '#old-style/Expression';
-import {Parsable} from '#old-style/Parsable';
+import {Context} from '#old-style/Context';
 
 describe(`Expression`, () => {
   let expression: TestExpression;
 
   beforeEach(() => {
-    expression = new TestExpression(new Parsable(`foo`));
+    expression = new TestExpression(new Context(`foo`));
   });
 
   describe(`#value`, () => {
