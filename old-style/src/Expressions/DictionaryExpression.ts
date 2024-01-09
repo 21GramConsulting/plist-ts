@@ -28,13 +28,13 @@ export class DictionaryExpression extends Expression<PlistDictionaryNode> {
       }
 
       if (expectSemicolon) {
-        if (this.context.present !== `;`) return this.error(`Expected semicolon.`);
+        if (this.context.present !== `;`) return this.error(`Expected semicolon`);
         this.context.commitPresent();
         expectSemicolon = false;
         continue;
       }
 
-      if (this.context.present === `;`) return this.error(`Unexpected semicolon.`);
+      if (this.context.present === `;`) return this.error(`Unexpected semicolon`);
 
       const item = parse(this.context);
       if (!item) return this.error(`Failed to parse Dictionary item.`);

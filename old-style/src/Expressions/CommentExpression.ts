@@ -13,22 +13,21 @@ export class CommentExpression extends Expression<PlistCommentNode> {
 
   private resolveLineComment(): PlistCommentNode | void {
     this.context.commitPresent();
-    let value: string | undefined;
+    let value = ``;
 
     while (this.context.hasFuture) {
-      let breaks = 0;
-      if (this.context.future[breaks] === `\r`) breaks++;
-      if (this.context.future[breaks] === `\n`) breaks++;
-
-      if (breaks > 0) value = this.context.present;
-      if (breaks > 1) this.context.updatePresent();
       this.context.updatePresent();
-      if (breaks > 0) break;
+
+      let hitTheBreak = false;
+      if (this.context.present === `\r`) hitTheBreak = true;
+      if (this.context.present === `\n`) hitTheBreak = true;
+
+      if (!hitTheBreak) value += this.context.present;
+      this.context.commitPresent();
+      if (hitTheBreak) break;
     }
 
-    const result = PlistCommentNode(value ?? this.context.present);
-    this.context.commitPresent();
-    return result;
+    return PlistCommentNode(value);
   }
 
   private resolveBlockComment(): PlistCommentNode | void {
