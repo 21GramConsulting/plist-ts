@@ -22,6 +22,10 @@ export class ExpressionFilter {
     return this.expressions.length > 1;
   }
 
+  public narrowDown(): void {
+    this.expressions = this.expressions.filter(e => e.couldMatch(this.context));
+  }
+
   public get expression(): Expression<any> | void {
     if (this.outOfOptions) return;
     if (this.undecided) return;

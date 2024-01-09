@@ -35,7 +35,7 @@ describe(`Context`, () => {
 
       it(`Logs with additional information.`, () => {
         expect(new Context(``).console(`log`, `foo`)).toBeUndefined();
-        expect(log).toHaveBeenCalledWith(`foo`, `line 1, column 1`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 1, column 1`);
       });
     });
   });
@@ -102,22 +102,22 @@ describe(`Context`, () => {
 
       it(`Logs with additional information.`, () => {
         const context = new Context(`foo\nbar`);
-        expect(log).toHaveBeenCalledWith(`foo`, `line 1, column 1`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 1, column 1`);
         context.updatePresent();
         expect(context.console(`log`, `foo`));
-        expect(log).toHaveBeenCalledWith(`foo`, `line 1, column 2`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 1, column 2`);
         context.updatePresent();
         expect(context.console(`log`, `foo`));
-        expect(log).toHaveBeenCalledWith(`foo`, `line 1, column 3`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 1, column 3`);
         context.updatePresent();
         expect(context.console(`log`, `foo`));
-        expect(log).toHaveBeenCalledWith(`foo`, `line 2, column 1`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 2, column 1`);
         context.updatePresent();
         expect(context.console(`log`, `foo`));
-        expect(log).toHaveBeenCalledWith(`foo`, `line 2, column 2`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 2, column 2`);
         context.updatePresent();
         expect(context.console(`log`, `foo`));
-        expect(log).toHaveBeenCalledWith(`foo`, `line 2, column 3`);
+        expect(log).toHaveBeenCalledWith(`foo`, `at line 2, column 3`);
       });
     });
   });

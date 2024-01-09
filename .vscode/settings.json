@@ -10,6 +10,7 @@
     "revealOn": "error",
     "revealWithFocus": "test-results"
   },
+  "jest.monitorLongRun": 500,
   "jest.virtualFolders": [
     { "name": "plist", "rootPath": "./plist/" },
     { "name": "old-style", "rootPath": "./old-style/" }

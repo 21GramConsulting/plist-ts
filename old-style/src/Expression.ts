@@ -3,7 +3,7 @@ import {Context} from "./Context";
 
 export abstract class Expression<Node extends PlistNode> {
   public isComplete: boolean = false;
-  protected readonly context: Context;
+  public context: Context;
   private result: Node | void = undefined;
 
   constructor(context: Context) {

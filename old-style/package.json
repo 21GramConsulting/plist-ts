@@ -13,6 +13,7 @@
     "types:check": "tsc --noEmit",
     "clean": "rimraf dist coverage",
     "test:unit": "jest --testPathPattern=tests/unit",
+    "test:uat": "jest --testPathPattern=tests/uat",
     "test": "jest"
   },
   "peerDependencies": {

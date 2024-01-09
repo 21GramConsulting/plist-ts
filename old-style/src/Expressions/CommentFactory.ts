@@ -5,6 +5,7 @@ import {CommentExpression} from "./CommentExpression";
 export class CommentFactory implements ExpressionFactory<CommentExpression> {
   couldMatch(context: Context): boolean {
     const [first, second] = context.present;
+    if (first === undefined) return true;
     if (first !== `/`) return false;
     if (second === undefined) return true;
     if (second === `/`) return true;

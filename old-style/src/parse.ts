@@ -24,8 +24,8 @@ export function parse(input: any): Expression<any> | void {
 
   while (filter.undecided) {
     context.updatePresent();
+    filter.narrowDown();
     if (filter.outOfOptions) return context.console(`error`, `Failed to parse input.`);
+    if (filter.expression) return filter.expression;
   }
-
-  return filter.expression?.value;
 }

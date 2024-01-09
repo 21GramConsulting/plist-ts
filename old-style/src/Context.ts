@@ -48,7 +48,7 @@ export class Context {
   ) {
     console[method](
       arg,
-      `line ${this.humanFriendlyPosition.line}, column ${this.humanFriendlyPosition.column}`
+      `at line ${this.humanFriendlyPosition.line}, column ${this.humanFriendlyPosition.column}`
     );
   }
 
