@@ -29,11 +29,14 @@ describe(`CommentFactory`, () => {
     it(`should return true if the context starts with a slash and the second character is a slash.`, () => {
       const context = new Context(`//`);
       context.updatePresent();
+      context.updatePresent();
       expect(new CommentFactory().couldMatch(context)).toBe(true);
     });
 
     it(`should return true if the context starts with a slash and the second character is a star.`, () => {
       const context = new Context(`/*`);
+      context.updatePresent();
+      context.updatePresent();
       expect(new CommentFactory().couldMatch(context)).toBe(true);
     });
 
