@@ -1,6 +1,6 @@
 import {Context} from "./Context";
 import {ExpressionFilter} from "./ExpressionFilter";
-import {StringFactory} from "./Expressions/StringFactors";
+import {StringFactory} from "./Expressions/StringFactory";
 import {CommentFactory} from "./Expressions/CommentFactory";
 import {ArrayFactory} from "./Expressions/ArrayFactory";
 import {BinaryFactory} from "./Expressions/BinaryFactory";

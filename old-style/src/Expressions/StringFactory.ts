@@ -4,12 +4,15 @@ import {StringExpression} from "./StringExpression";
 
 export class StringFactory implements ExpressionFactory<StringExpression> {
   doesMatch(context: Context): boolean {
-    return this.couldMatch(context);
+    if (context.present === ``) return false;
+    if (context.present.startsWith(`"`) && !context.hasFuture) return false;
+    if (!StringExpression.simple.test(context.present)) return false;
+    return true;
   }
 
   couldMatch(context: Context): boolean {
-    if (!context.hasFuture) return false;
-    if (context.present === `"`) return true;
+    if (context.present === ``) return true;
+    if (context.present.startsWith(`"`) && context.hasFuture) return true;
     return StringExpression.simple.test(context.present);
   }
 

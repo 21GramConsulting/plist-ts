@@ -7,4 +7,4 @@ export * from './CommentFactory';
 export * from './DictionaryExpression';
 export * from './DictionaryFactory';
 export * from './StringExpression';
-export * from './StringFactors';
+export * from './StringFactory';
