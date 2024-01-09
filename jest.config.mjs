@@ -14,7 +14,6 @@ export default {
   },
   coveragePathIgnorePatterns: [`/node_modules/`, `/dist/`, `/tests/`],
   collectCoverageFrom: [`./src/**/*.ts`],
-  coverageReporters: [`text`, `html`],
   modulePathIgnorePatterns: [`dist`],
   moduleNameMapper: pathsToModuleNameMapper(
     tsConfig.compilerOptions.paths,
