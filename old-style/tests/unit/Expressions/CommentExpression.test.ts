@@ -5,24 +5,24 @@ import {PlistCommentNode} from "@21gram-consulting/plist";
 
 describe(`CommentExpression`, () => {
   let context: Context;
-  let commentExpression: CommentExpression;
+  let expression: CommentExpression;
   let console: jest.SpyInstance;
 
   beforeEach(() => {
     jest.clearAllMocks();
     context = new Context(``);
-    commentExpression = new CommentExpression(context);
+    expression = new CommentExpression(context);
     console = jest.spyOn(context, `console`).mockImplementation(() => {});
 
-    expect(commentExpression.context).toStrictEqual(context);
+    expect(expression.context).toStrictEqual(context);
   });
 
   describe(`resolution failures`, () => {
     let expectedMessage: string;
 
     afterEach(() => {
-      expect(commentExpression.node).toBeUndefined();
-      expect(commentExpression.value).toBe(undefined);
+      expect(expression.node).toBeUndefined();
+      expect(expression.value).toBe(undefined);
       expect(console).toHaveBeenCalledWith(`error`, expectedMessage);
     });
 
@@ -53,8 +53,8 @@ describe(`CommentExpression`, () => {
     it(`should resolve when we only have //`, () => {
       set(context, `whole`, `//`);
       repeatedUpdate(2, context);
-      expect(commentExpression.value).toBe(``);
-      expect(commentExpression.node).toEqual(PlistCommentNode(``));
+      expect(expression.value).toBe(``);
+      expect(expression.node).toEqual(PlistCommentNode(``));
     });
 
     it.each([
@@ -78,13 +78,13 @@ describe(`CommentExpression`, () => {
       set(context, `whole`, input);
       repeatedUpdate(2, context);
       const expected = input.slice(2).split(/(\r|\n)/)[0]!;
-      expect(commentExpression.value).toBe(expected);
-      expect(commentExpression.node).toEqual(PlistCommentNode(expected));
+      expect(expression.value).toBe(expected);
+      expect(expression.node).toEqual(PlistCommentNode(expected));
     });
   });
 
   afterEach(() => {
-    expect(commentExpression.isComplete).toBe(true);
+    expect(expression.isComplete).toBe(true);
   });
 
   describe(`correct block comment`, () => {
@@ -93,8 +93,8 @@ describe(`CommentExpression`, () => {
     it(`should resolve when we only have /**/`, () => {
       set(context, `whole`, `/**/`);
       repeatedUpdate(2, context);
-      expect(commentExpression.value).toBe(``);
-      expect(commentExpression.node).toEqual(PlistCommentNode(``));
+      expect(expression.value).toBe(``);
+      expect(expression.node).toEqual(PlistCommentNode(``));
     });
 
     it.each([
@@ -118,8 +118,8 @@ describe(`CommentExpression`, () => {
       set(context, `whole`, input);
       repeatedUpdate(2, context);
       const expected = input.slice(2, -2);
-      expect(commentExpression.value).toBe(expected);
-      expect(commentExpression.node).toEqual(PlistCommentNode(expected));
+      expect(expression.value).toBe(expected);
+      expect(expression.node).toEqual(PlistCommentNode(expected));
     });
   });
 });

@@ -6,36 +6,43 @@ export class StringExpression extends Expression<PlistStringNode> {
 
   protected resolve(): PlistStringNode | void {
     return this.context.present[0] === `"`
-      ? this.resolveProper()
+      ? this.resolveQuoted()
       : this.resolveSimple();
   }
 
   private resolveSimple(): PlistStringNode | void {
+    let value = this.context.present;
     this.context.commitPresent();
+
     while (this.context.hasFuture) {
-      if (StringExpression.simple.test(this.context.future[0] ?? ``)) break;
+      if (!StringExpression.simple.test(this.context.future[0]!)) break;
       this.context.updatePresent();
+      value += this.context.present;
+      this.context.commitPresent();
     }
-    const result = PlistStringNode(this.context.present);
-    this.context.commitPresent();
-    return result;
+
+    return PlistStringNode(value);
   }
 
-  private resolveProper(): PlistStringNode | void {
+  private resolveQuoted(): PlistStringNode | void {
     this.context.commitPresent();
-    let didClose = false;
+    let value = ``;
+
     while (this.context.hasFuture) {
       this.context.updatePresent();
-      if (this.context.present.endsWith(`\\"`)) continue;
-      if (this.context.present.endsWith(`"`)) {
-        didClose = true;
-        break;
+      if (this.context.present === `"`) {
+        this.context.commitPresent();
+        return PlistStringNode(value);
       }
+      if (this.context.present === `\\`) {
+        value += `\\`;
+        this.context.commitPresent();
+        this.context.updatePresent();
+      }
+      value += this.context.present;
+      this.context.commitPresent();
     }
-    if (!didClose) return this.error(`Unclosed string.`);
-    const result = PlistStringNode(this.context.present);
-    this.context.commitPresent();
-    return result;
+    return this.error(`Unclosed string.`);
   }
 
 }
